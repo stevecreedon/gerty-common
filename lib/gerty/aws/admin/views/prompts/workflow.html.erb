@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://gerty-web-assets.s3.eu-west-1.amazonaws.com/css/gerty.css">
+    <script  type="text/javascript" src='https://gerty-web-assets.s3.eu-west-1.amazonaws.com/js/prompts/workflow.js'></script>
+  </head> 
+  <body>
+    <h1>Prompts</h1>
+    <form action="/aws/admin/workflow-prompt-keys" method="POST">
+      <input type="hidden" id="workflow_id" name="workflow_id" value="<%= workflow_id %>" />
+      <input type="hidden" id="workflow_key" name="workflow_key" value="<%= workflow_key %>" />
+      <input type="hidden" name="subdomain" value="<%= subdomain %>" /> 
+        <% columns.each do |column| %>
+          <table>
+            <input type="hidden" id="column-<%= column.id %>" name="column[<%= column.id %>]" value="<%= column.prompt_id %>">
+            <tr><th colspan="2"><%= column.kanbanize.name %></th></tr>
+            <tr>
+              <td>
+                <select
+                  data-type="prompts-select" 
+                  data-column_id="<%= column.id %>"
+                ></select>
+              </td>
+            </tr>
+          </table> 
+        <% end %>
+      <p>&nbsp;</p>
+      <input type="submit" />
+    </form>
+  </body>
+</html>

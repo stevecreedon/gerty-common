@@ -1,0 +1,56 @@
+require_relative 'base'
+
+module Gerty
+  module Aws
+    module DynamoDb
+      module Advice
+        extend self
+        extend Gerty::Aws::DynamoDb::Base
+
+         # advice is expectded to be a hash
+        # { owner: "owner advice", co_owner: "co-owner advice" }
+        def upsert_advice(
+          id:, 
+          advice:,
+          column_key:,
+          workflow_key:
+        )
+        
+          dynamo_resource.client.update_item({
+            table_name: ENV['ADVICE_TABLE_NAME'],
+            key: { id: id },
+            update_expression: 'SET advice = :advice, column_key = :column_key, workflow_key = :workflow_key, updated_at = :updated_at',
+            expression_attribute_values: { 
+              ':advice': advice,
+              ':column_key': column_key,
+              ':advice_key': workflow_key,
+              ':updated_at': DateTime.now.iso8601
+            }   
+          })
+        end
+
+        def get_advice_from_id(advice_id)
+          dynamo_resource.client.get_item({
+            table_name: ENV['ADVICE_TABLE_NAME'],
+            key: { "id" => advice_id }
+          })['item']
+        end
+ 
+        def workflow_key(workflow_key)
+          workflow_key_ids(workflow_key).collect do |index_key|
+            get_advice_from_id(index_key['id'])
+          end
+        end
+        
+        def workflow_key_ids(workflow_key)
+          dynamo_resource.client.query({
+            expression_attribute_values: { ":workflow_key" => workflow_key }, 
+            key_condition_expression: "workflow_key = :workflow_key",
+            index_name: 'workflow_key',
+            table_name: ENV['ADVICE_TABLE_NAME'], 
+          })[:items]
+        end
+      end
+    end
+  end
+end

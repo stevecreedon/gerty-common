@@ -1,0 +1,78 @@
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://gerty-web-assets.s3.eu-west-1.amazonaws.com/css/gerty.css">
+    <script  type="text/javascript" src='https://gerty-web-assets.s3.eu-west-1.amazonaws.com/js/advice/index.js'></script>
+  </head> 
+  <body>
+    <h1>Advice</h1>
+    <form action="/aws/admin/advice" method="POST">
+      <input type="hidden" name="board_id" value="<%= board_id %>" />
+      <input type="hidden" name="subdomain" value="<%= subdomain %>" />
+       <% workflow_cards.workflow_cards.each do |workflow, columns| %>
+        <h2><%= workflow %></h2>
+          <% columns.sort_by{ |col| col.id }.each do |column| %>
+            <table>
+              <tr><th colspan="2"><%= workflow %> : <%= column.kanbanize.name %></th></tr>
+              <tr>
+                <td>
+                  <select 
+                    data-type="workflow-select"
+                    data-column_id="<%= column.id %>"
+                  ></select>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <select
+                    data-type="advice-select" 
+                    data-column_id="<%= column.id %>"
+                  ></select>
+                </td>
+              </tr>
+              <tr>
+                <td>Owner</td>
+                <td>
+                  <div 
+                    data-original-advice_id="<%= column.advice ? column.advice['id'] : nil %>"
+                    data-advice_id="<%= column.advice ? column.advice['id'] : nil %>"  
+                    data-column_id="<%= column.id %>"
+                    data-workflow="<%= column.advice ? column.advice['workflow_name'] : nil %>"  
+                    data-ownership="owner" 
+                    name="column[]" 
+                    rows='20'
+                  >
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Co-Owner</td>
+                <td>
+                  <div 
+                  data-original-advice_id="<%= column.advice ? column.advice['id'] : nil %>"
+                  data-advice_id="<%= column.advice ? column.advice['id'] : nil %>"  
+                  data-column_id="<%= column.id %>"
+                  data-workflow="<%= column.advice ? column.advice['workflow_name'] : nil %>"  
+                  data-ownership="co_owner" 
+                  name="column[]" 
+                  rows='20'
+                  ></div>
+                </td>
+              </tr>
+            </table> 
+          <% end %>
+        <p>&nbsp;</p>
+      <% end %>
+    </form>
+   
+  </body>
+</html>
+
+
+
+
+
+
+
+
+  

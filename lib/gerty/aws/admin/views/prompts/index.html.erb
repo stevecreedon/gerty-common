@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=" https://gerty-web-assets.s3.eu-west-1.amazonaws.com/css/gerty.css">
+  </head>
+  <body>
+    <h1>Prompts</h1>
+    <form action="/aws/admin/prompts" method="POST">
+      <input type="hidden" name="board_id" value="<%= board_id %>" />
+      <% workflow_cards.workflow_cards.each do |workflow, columns| %>
+        <h2><%= workflow %></h2>
+          <% columns.sort_by{ |col| col.id }.each do |column| %>
+            <table>
+              <tr><th colspan="2"><%= workflow %> : <%= column.kanbanize.name %></th></tr>
+              <tr><td>Owner</td><td><textarea name="column[<%= column.id %>][prompts][owner]" rows='5'><%= column.prompts['owner'] %></textarea></td></tr>
+              <tr><td>Co-Owner</td><td><textarea name="column[<%= column.id %>][prompts][co_owner]" rows='5'><%= column.prompts['co_owner'] %></textarea></td></tr>
+            </table> 
+          <% end %>
+        <p>&nbsp;</p>
+      <% end %>
+      <input type="submit" />
+    </form>
+   
+  </body>
+</html>
+
+
+
+
+
+
+
+
+  
