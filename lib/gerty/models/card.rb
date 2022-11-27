@@ -1,5 +1,5 @@
-require 'app/aws/dynamodb/users'
-require 'app/aws/dynamodb/columns'
+require 'gerty/aws/dynamodb/users'
+require 'gerty/aws/dynamodb/columns'
 require 'date'
 require_relative 'user'
 require_relative 'column'

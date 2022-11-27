@@ -1,8 +1,8 @@
 require 'honeybadger'
-require 'app/aws/dynamodb/import'
+require 'gerty/aws/dynamodb/import'
 
 module Gerty
-  module Util
+  module Common
     module Error 
 
       def self.try

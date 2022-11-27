@@ -1,4 +1,4 @@
-require 'app/aws/dynamodb/cards'
+require 'gerty/aws/dynamodb/cards'
 require_relative 'card'
 
 module Gerty

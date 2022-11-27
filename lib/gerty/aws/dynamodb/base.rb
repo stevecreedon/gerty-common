@@ -1,5 +1,5 @@
 require 'aws-sdk-dynamodb'
-require 'app/util/logger'
+require 'gerty/common/logger'
 
 module Gerty
   module Aws

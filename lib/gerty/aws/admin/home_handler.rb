@@ -14,7 +14,7 @@ module Gerty
       end
 
       def self.view
-        File.new('app/aws/admin/views/home.html.erb').read
+        File.new('gerty/aws/admin/views/home.html.erb').read
       end
 
     end

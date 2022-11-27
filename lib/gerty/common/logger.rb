@@ -1,7 +1,7 @@
 require 'logger'
 
 module Gerty
-  module Util
+  module Common
     LOGGER = ::Logger.new($stdout)
     case ENV['STAGE']
     when 'development'

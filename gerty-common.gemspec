@@ -1,7 +1,7 @@
 require_relative 'lib/gerty/common/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "gerty-common"
+  spec.name          = "gerty_common"
   spec.version       = Gerty::Common::VERSION
   spec.authors       = ["stevecreedon"]
   spec.email         = ["steve@creedon.me"]

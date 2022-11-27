@@ -1,6 +1,6 @@
-require 'app/aws/dynamodb/advice'
-require 'app/aws/dynamodb/prompt'
-require 'app/aws/dynamodb/columns'
+require 'gerty/aws/dynamodb/advice'
+require 'gerty/aws/dynamodb/prompt'
+require 'gerty/aws/dynamodb/columns'
 
 module Gerty
   module Models

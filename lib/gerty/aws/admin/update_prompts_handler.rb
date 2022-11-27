@@ -1,6 +1,6 @@
-require 'app/aws/dynamodb/columns'
-require 'app/aws/http_event'
-require 'app/util/error'
+require 'gerty/aws/dynamodb/columns'
+require 'gerty/aws/http_event'
+require 'gerty/common/error'
 
 module Gerty
   module Aws

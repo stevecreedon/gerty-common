@@ -1,6 +1,6 @@
-require 'app/models/column'
-require 'app/aws/dynamodb/columns'
-require 'app/aws/dynamodb/advice'
+require 'gerty/models/column'
+require 'gerty/aws/dynamodb/columns'
+require 'gerty/aws/dynamodb/advice'
 
 class WorkflowCards
 

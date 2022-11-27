@@ -1,8 +1,8 @@
 require 'erb'
 require 'json'
-require 'app/aws/http_event'
-require 'app/aws/dynamodb/advice'
-require 'app/models/column'
+require 'gerty/aws/http_event'
+require 'gerty/aws/dynamodb/advice'
+require 'gerty/models/column'
 
 module Gerty
   module Aws
@@ -23,7 +23,7 @@ module Gerty
         {
             body: workflow_advice_data.to_json,
             statusCode: 200,
-            headers: { "Content-Type" => 'application/json' } 
+            headers: { "Content-Type" => 'gertylication/json' } 
         }
       end
 
@@ -46,7 +46,7 @@ module Gerty
       end
 
       def self.view
-        File.new('app/aws/admin/views/advice/workflow.html.erb').read
+        File.new('gerty/aws/admin/views/advice/workflow.html.erb').read
       end
     end
   end
